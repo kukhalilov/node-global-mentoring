@@ -1,22 +1,20 @@
-import fs from 'fs';
+import { pipeline } from 'stream';
 import csvtojson from 'csvtojson';
+import fs from 'fs';
+import path from 'path';
 
-const csvFilePath = './csv/username.csv';
-const txtFilePath = './txt/username.txt';
+const csvFilePath = path.resolve(__dirname, './csv/username.csv');
+const txtFilePath = path.resolve(__dirname, './txt/username.txt');
 
-csvtojson()
-.fromFile(csvFilePath)
-.then((jsonObj)=>{
-    if(fs.existsSync(txtFilePath)){
-        fs.unlinkSync(txtFilePath);
+pipeline(
+    fs.createReadStream(csvFilePath),
+    csvtojson(),
+    fs.createWriteStream(txtFilePath),
+    (err) => {
+        if (err) {
+            console.error('Pipeline failed.', err);
+        } else {
+            console.log('Pipeline succeeded.');
+        }
     }
-    jsonObj.forEach((obj)=>{
-        fs.appendFile(txtFilePath, JSON.stringify(obj) + '\n', (err) => {
-            if (err) {
-                console.error(err);
-                return;
-            };
-        });
-    });
-    console.log('File has been created');
-});
+);
