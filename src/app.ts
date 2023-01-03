@@ -1,5 +1,8 @@
 import express from 'express';
 import router from './api/routes/index.js';
+import dbInit from './db/init.js';
+
+dbInit();
 
 const app = express();
 app.use(express.json());
