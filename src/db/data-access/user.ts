@@ -1,20 +1,20 @@
 import { Op } from 'sequelize';
 import User from '../models/User.js';
-import { UserInput, UserOuput } from '../models/User.js';
+import { UserInput, UserOutput } from '../models/User.js';
 
-export const create = async (payload: UserInput): Promise<UserOuput> => {
+export const create = async (payload: UserInput): Promise<UserOutput> => {
     const user = await User.create(payload);
     return user;
 };
 
-export const update = async (id: string, payload: Partial<UserInput>): Promise<UserOuput> => {
+export const update = async (id: string, payload: Partial<UserInput>): Promise<UserOutput> => {
     const user = await User.findByPk(id);
     const updatedUser = await (user as User).update(payload);
     return updatedUser;
 };
 
-export const getById = async (id: string): Promise<UserOuput> => {
-    const user = await User.findByPk(id) as UserOuput;
+export const getById = async (id: string): Promise<UserOutput> => {
+    const user = await User.findByPk(id) as UserOutput;
     return user;
 };
 
@@ -25,7 +25,7 @@ export const deleteById = async (id: string): Promise<boolean> => {
     return true;
 };
 
-export const getAutoSuggestUsers = async (loginSubstring: string, limit: number): Promise<UserOuput[]> => {
+export const getAutoSuggestUsers = async (loginSubstring: string, limit: number): Promise<UserOutput[]> => {
     if (loginSubstring !== '') {
         return await User.findAll({
             where: {

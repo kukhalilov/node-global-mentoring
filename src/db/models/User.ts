@@ -8,8 +8,9 @@ interface UserAttributes {
   age: number;
   isDeleted: boolean;
 }
+
 export interface UserInput extends Optional<UserAttributes, 'id'> {}
-export interface UserOuput extends Required<UserAttributes> {}
+export interface UserOutput extends Required<UserAttributes> {}
 
 class User extends Model<UserAttributes, UserInput> implements UserAttributes {
     public id!: string;

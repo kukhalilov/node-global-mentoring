@@ -1,7 +1,7 @@
-import User from '../../interfaces/index.js';
-import { UserOuput } from '../../../db/models/User.js';
+import { User } from '../../interfaces/index.js';
+import { UserOutput } from '../../../db/models/User.js';
 
-export const toUser = (user: UserOuput): User => {
+export const toUser = (user: UserOutput): User => {
     return {
         id: user.id,
         login: user.login,
