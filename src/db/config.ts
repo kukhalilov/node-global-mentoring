@@ -10,7 +10,8 @@ const sequelizeConnection = new Sequelize(dbName, dbUser, dbPassword, {
     dialect: 'postgres',
     define: {
         timestamps: false
-    }
+    },
+    logging: false
 });
 
 export default sequelizeConnection;
