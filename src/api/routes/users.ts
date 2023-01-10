@@ -27,12 +27,7 @@ usersRouter.get('/:id', async (req: Request, res: Response) => {
     }
 });
 
-const logger = (req: Request, res: Response, next: any) => {
-    console.log('Request was made');
-    next();
-};
-
-usersRouter.get('/:id', logger, async (req: Request, res: Response) => {
+usersRouter.get('/:id', async (req: Request, res: Response) => {
     const result = await userController.getById(req.params.id);
     return res.status(200).send(result);
 });
